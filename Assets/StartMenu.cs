@@ -11,7 +11,6 @@ public class StartMenu : MonoBehaviour
 
     public void OnClick(){
         SceneManager.LoadScene("Game_Level");
-        Debug.Log("WOOOOOT");
     }
 
     void Start(){
