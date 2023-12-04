@@ -18,9 +18,9 @@ public class TaxMenuScript : MonoBehaviour
     void Start()
     {
         //TODO: read in a file of some format (prolly json); make sure to clamp to 2 decimal places
-        string[] fileData = new String[4];//0: tax rate, 1: hourly rate, 2: hours worked, 3: name of next scene
-        float taxRate, hourlyRate;
-        int hoursWorked;
+        string[] fileData = new string[4];//0: tax rate, 1: hourly rate, 2: hours worked, 3: name of next scene
+        float taxRate = .10f, hourlyRate=15f;
+        int hoursWorked = 0;
 
         nextLevel = "placeholder lmao ";
 
@@ -31,7 +31,7 @@ public class TaxMenuScript : MonoBehaviour
         answerToGrossPay = hourlyRate * hoursWorked;
         answerToNetPay = answerToGrossPay * (1 - taxRate);
 
-        submit.gameObject.onClick.AddListener(onClick);
+        //submit.gameObject.onClick.AddListener(onClick);
     }
 
     void onClick(){
