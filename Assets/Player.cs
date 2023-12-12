@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private bool isHoldingPizza;
     private int correctDeliveries;
     private int wrongDeliveries;
+    private float gravity;
 
     public float speed = 10.0f;
     public float turnSpeed = 150.0f;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
         controller = GetComponent <CharacterController>();
         animationController = GetComponent<Animator>();
         moveDirection = Vector3.zero;
+        gravity = 20f;
     }
 
     // Update is called once per frame
@@ -36,6 +38,10 @@ public class Player : MonoBehaviour
         {
             moveDirection = Vector3.zero;
             animationController.SetBool("isMoving", false);
+        }
+        if (!controller.isGrounded)
+        {
+            moveDirection.y -= gravity * Time.deltaTime;
         }
         controller.Move(moveDirection * speed * Time.deltaTime);
 
