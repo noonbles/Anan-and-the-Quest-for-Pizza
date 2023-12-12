@@ -8,3 +8,5 @@ UserSettings/*
 .vs/*
 .vsconfig
 .vscode/*
+Assembly-CSharp-Editor.csproj
+Assembly-CSharp.csproj
