@@ -5,7 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private CharacterController controller;
-    private Vector3 moveDirection = Vector3.zero;
+    private Animator animationController;
+    private Vector3 moveDirection;
 
     public float speed = 10.0f;
     public float turnSpeed = 150.0f;
@@ -14,6 +15,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         controller = GetComponent <CharacterController>();
+        animationController = GetComponent<Animator>();
+        moveDirection = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -24,10 +27,12 @@ public class Player : MonoBehaviour
             float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
             float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
             moveDirection = new Vector3(xdirection, 0.0f, zdirection);
+            animationController.SetBool("isMoving", true);
         }
         else
         {
             moveDirection = Vector3.zero;
+            animationController.SetBool("isMoving", false);
         }
         controller.Move(moveDirection * speed * Time.deltaTime);
 
