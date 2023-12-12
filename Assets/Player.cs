@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
     private CharacterController controller;
     private Animator animationController;
     private Vector3 moveDirection;
+    private bool isHoldingPizza;
+    private int correctDeliveries;
+    private int wrongDeliveries;
 
     public float speed = 10.0f;
     public float turnSpeed = 150.0f;
