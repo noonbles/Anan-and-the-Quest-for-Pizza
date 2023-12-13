@@ -17,29 +17,9 @@ public class Player : MonoBehaviour
     public float speed = 10.0f;
     public float turnSpeed = 150.0f;
     public float totalTime = 120f;
-    public bool currentTime;
+    public float currentTime;
     public float totalStamina = 13f;
     public float stamina;
-
-    void writeDataToFile(int gameLevel, bool irsSpawn){
-        //TODO: CREATE A FILE FOR THE TAX MENU SCRIPT TO READ
-        //WE NEED TO STORE THE CURRENT LEVEL AND IS IRS SPAWNING
-        //IF FIRST LEVEL, IRS SPAWNING IS FALSE; ONLY CHANGE TO TRUE IN THE TAX MENU SCRIPT IF PLAYER GETS ANSWER(S) WRONG
-        //MAY NEED MORE FIELDS TO SAVE BUT CANT THINK OF ANY AT THE MOMENT
-        
-    }
-
-    void handleRoundTimer(){
-        //ROUND TIMER
-        if(currentTime > 0){
-            //TODO: CREATE A VARIABLE FOR TIMER GAME OBJECT AND MODIFY IT HERE
-            currentTime -= totalTime.deltaTime;
-        }else{
-            //TIMES UP BITCH
-            writeDataToFile();
-            SceneManager.LoadScene("TaxMenu"); //THIS MIGHT NOT BE THE RIGHT NAME RN
-        }
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -86,5 +66,25 @@ public class Player : MonoBehaviour
 
         float turn = Input.GetAxis("Horizontal");
         transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
+    }
+
+    void writeDataToFile(int gameLevel, bool irsSpawn){
+        //TODO: CREATE A FILE FOR THE TAX MENU SCRIPT TO READ
+        //WE NEED TO STORE THE CURRENT LEVEL AND IS IRS SPAWNING
+        //IF FIRST LEVEL, IRS SPAWNING IS FALSE; ONLY CHANGE TO TRUE IN THE TAX MENU SCRIPT IF PLAYER GETS ANSWER(S) WRONG
+        //MAY NEED MORE FIELDS TO SAVE BUT CANT THINK OF ANY AT THE MOMENT
+        
+    }
+
+    void handleRoundTimer(){
+        //ROUND TIMER
+        if(currentTime > 0){
+            //TODO: CREATE A VARIABLE FOR TIMER GAME OBJECT AND MODIFY IT HERE
+            currentTime -= Time.deltaTime;
+        }else{
+            //TIMES UP BITCH
+            writeDataToFile(0, false);
+            SceneManager.LoadScene("TaxMenu"); //THIS MIGHT NOT BE THE RIGHT NAME RN
+        }
     }
 }
