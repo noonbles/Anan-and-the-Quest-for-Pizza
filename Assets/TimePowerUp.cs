@@ -7,7 +7,8 @@ public class TimePowerUp : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         Player p = collision.GetComponent<Player>();
-        if(p){
+        if (p)
+        {
             p.currentTime += 5f;
             Destroy(gameObject);
         }

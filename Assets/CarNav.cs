@@ -7,8 +7,16 @@ public class CarNav : MonoBehaviour
 {
     public NavMeshAgent CarAgent;
 
+    private int pos = 0;
     private Vector3[] ToDriveDest = {
         new Vector3(-389.85f, 69.66f, 14f),
+        new Vector3(-397.85f, 69.66f, 46f),
+        new Vector3(-329.85f, 69.66f, 50f),
+        new Vector3(-289.85f, 69.66f, 54f),
+        new Vector3(-253.85f, 69.66f, 62f),
+        new Vector3(-213.85f, 69.66f, 62f),
+        new Vector3(-209.85f, 69.66f, 18f),
+        new Vector3(-313.85f, 69.66f, 14f),
     };
     // Start is called before the first frame update
     void Start()
@@ -21,7 +29,8 @@ public class CarNav : MonoBehaviour
     {
         if(CarAgent.remainingDistance <= 0.05f)
         {
-            CarAgent.SetDestination(new Vector3(-397.85f, 69.66f, 46f));
+            pos = (pos + 1) % 8;
+            CarAgent.SetDestination(ToDriveDest[pos]);
         }
     }
 }
