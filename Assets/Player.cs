@@ -1,19 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     private CharacterController controller;
     private Animator animationController;
     private Vector3 moveDirection;
-    private bool isHoldingPizza;
-    private int correctDeliveries;
-    private int wrongDeliveries;
+    public bool isHoldingPizza = false;
+    public string heldPizzaName = "";
+    public int correctDeliveries;
+    public int wrongDeliveries;
     private float gravity;
 
     public float speed = 10.0f;
     public float turnSpeed = 150.0f;
+    public float totalTime = 120f;
+    public bool currentTime;
+    public float totalStamina = 13f;
+    public float stamina;
+
+    void writeDataToFile(int gameLevel, bool irsSpawn){
+        //TODO: CREATE A FILE FOR THE TAX MENU SCRIPT TO READ
+        //WE NEED TO STORE THE CURRENT LEVEL AND IS IRS SPAWNING
+        //IF FIRST LEVEL, IRS SPAWNING IS FALSE; ONLY CHANGE TO TRUE IN THE TAX MENU SCRIPT IF PLAYER GETS ANSWER(S) WRONG
+        //MAY NEED MORE FIELDS TO SAVE BUT CANT THINK OF ANY AT THE MOMENT
+        
+    }
+
+    void handleRoundTimer(){
+        //ROUND TIMER
+        if(currentTime > 0){
+            //TODO: CREATE A VARIABLE FOR TIMER GAME OBJECT AND MODIFY IT HERE
+            currentTime -= totalTime.deltaTime;
+        }else{
+            //TIMES UP BITCH
+            writeDataToFile();
+            SceneManager.LoadScene("TaxMenu"); //THIS MIGHT NOT BE THE RIGHT NAME RN
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +47,25 @@ public class Player : MonoBehaviour
         controller = GetComponent <CharacterController>();
         animationController = GetComponent<Animator>();
         moveDirection = Vector3.zero;
+        currentTime = totalTime;
+        stamina = totalStamina;
         gravity = 20f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        handleRoundTimer();
+
+        //STAMINA BAR; LASTS 13 SECONNDS AND DOES NOT REPLENISH UNLESS GRANTED BY SOMETHING ELSE
+        if(Input.GetKey ("left shift") && stamina > 0){
+            //TODO: CREATE A BAR THAT RESIZES BASED ON STAMINA PROPORTION STAMINA/TOTALSTAMINAz
+            speed = 15.0f;
+            stamina -= Time.deltaTime;
+        }else{
+            speed = 10.0f;
+        }
+
         if(Input.GetKey ("w"))
         {
             float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
