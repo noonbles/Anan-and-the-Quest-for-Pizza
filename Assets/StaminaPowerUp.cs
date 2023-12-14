@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class StaminaPowerUp : MonoBehaviour
 {
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("FUCK");
         Player p = collision.gameObject.GetComponent<Player>();
         if (p)
         {

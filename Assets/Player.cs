@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     public float currentTime;
     public float totalStamina = 13f;
     public float stamina;
+    public bool isAlive; //modify if IRS touches or car touches
+    public Image staminaBar;
 
     public Text timer;
 
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
         moveDirection = Vector3.zero;
         currentTime = totalTime;
         stamina = totalStamina;
+        isAlive = true;
         gravity = 20f;
     }
 
@@ -39,18 +42,22 @@ public class Player : MonoBehaviour
     void Update()
     {
         handleRoundTimer();
-
-        //STAMINA BAR; LASTS 13 SECONNDS AND DOES NOT REPLENISH UNLESS GRANTED BY SOMETHING ELSE
-        if(Input.GetKey ("left shift") && stamina > 0){
-            //TODO: CREATE A BAR THAT RESIZES BASED ON STAMINA PROPORTION STAMINA/TOTALSTAMINAz
-            speed = 15.0f;
-            stamina -= Time.deltaTime;
-        }else{
-            speed = 10.0f;
-        }
+        handleGameState();
+        staminaBar.rectTransform.sizeDelta = new Vector2((stamina/totalStamina) * 1200, 30);
 
         if(Input.GetKey ("w"))
         {
+            //STAMINA BAR; LASTS 13 SECONNDS AND DOES NOT REPLENISH UNLESS GRANTED BY SOMETHING ELSE
+            if(Input.GetKey ("left shift") && stamina > 0){
+                //TODO: CREATE A BAR THAT RESIZES BASED ON STAMINA PROPORTION STAMINA/TOTALSTAMINAz
+                speed = 15.0f;
+                stamina -= Time.deltaTime;
+                
+            }else{
+                speed = 10.0f;
+            }
+
+
             float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
             float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
             moveDirection = new Vector3(xdirection, 0.0f, zdirection);
@@ -77,6 +84,12 @@ public class Player : MonoBehaviour
         //IF FIRST LEVEL, IRS SPAWNING IS FALSE; ONLY CHANGE TO TRUE IN THE TAX MENU SCRIPT IF PLAYER GETS ANSWER(S) WRONG
         //MAY NEED MORE FIELDS TO SAVE BUT CANT THINK OF ANY AT THE MOMENT
         
+    }
+
+    void handleGameState(){
+        if(!isAlive){
+            SceneManager.LoadScene("Game_Over");
+        } 
     }
 
     void handleRoundTimer(){

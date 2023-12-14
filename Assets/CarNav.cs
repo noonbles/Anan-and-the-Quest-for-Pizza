@@ -63,4 +63,11 @@ public class CarNav : MonoBehaviour
             }
         }
     }
+
+    void OnTriggerEnter(Collider collider){
+        Player p = collider.gameObject.GetComponent<Player>();
+        if(p){
+            p.isAlive = false;
+        }
+    }
 }

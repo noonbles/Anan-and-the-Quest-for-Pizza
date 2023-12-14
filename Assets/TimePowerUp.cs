@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimePowerUp : MonoBehaviour
 {
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         Player p = collision.gameObject.GetComponent<Player>();
         if (p)

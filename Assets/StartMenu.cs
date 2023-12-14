@@ -7,14 +7,9 @@ using UnityEngine.UI;
 public class StartMenu : MonoBehaviour
 {
     public GameObject pizza;
-    public Button btn;
 
     public void OnClick(){
-        SceneManager.LoadScene("Game_Level");
-    }
-
-    void Start(){
-        btn.onClick.AddListener(OnClick);
+        SceneManager.LoadScene("GameLevel");
     }
 
     void Update()
