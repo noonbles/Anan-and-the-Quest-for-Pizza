@@ -7,17 +7,14 @@ public class House : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Player p = other.gameObject.GetComponent<Player>();
-        if (p)
+        if (p && p.isHoldingPizza)
         {
             string selfName = gameObject.name;
-            if (selfName.Equals(p.heldPizzaName))
-            {
-                Debug.Log("Do thingy here");
-            }
+            if(selfName.Equals(p.heldPizzaName))
+                p.correctDeliveries++;
             else
-            {
-                Debug.Log("Do some other thingy here");
-            }
+                p.wrongDeliveries++;
+            p.isHoldingPizza = false;
         }
     }
 }

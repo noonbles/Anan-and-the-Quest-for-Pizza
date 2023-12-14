@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
         if(animationDone){
             handleRoundTimer();
             handleGameState();
+            handlePizza();
             staminaBar.rectTransform.sizeDelta = new Vector2((stamina/totalStamina) * 1200, 30);
 
             if(Input.GetKey ("w"))
@@ -96,6 +97,16 @@ public class Player : MonoBehaviour
         }else{
             DataWriter.writeData(0, false, correctDeliveries * 15 - wrongDeliveries * 5);
             LeanTween.moveX(blackScreen.gameObject, 300, 1.0f).setOnComplete(()=>{SceneManager.LoadScene("Taxes_Menu");});
+        }
+    }
+
+    void handlePizza(){
+        Transform pizza = transform.Find("Pizza");
+        if(isHoldingPizza && !heldPizzaName.Equals("")){
+            pizza.gameObject.SetActive(true);
+            pizza.Rotate(Vector3.up * 7f * Time.deltaTime);
+        }else{
+            pizza.gameObject.SetActive(false);
         }
     }
 }
