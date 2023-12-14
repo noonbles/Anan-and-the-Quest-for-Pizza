@@ -9,47 +9,41 @@ public class TaxMenuScript : MonoBehaviour
     public InputField grossPay;
     public InputField netPay;
     public Text infoText;
-    public Button submit;
-
     private float answerToGrossPay;
     private float answerToNetPay;
-    private string nextLevel;
 
     void Start()
     {
-        //TODO: read in a file of some format (prolly json); make sure to clamp to 2 decimal places
-        string[] fileData = new string[4];//0: tax rate, 1: hourly rate, 2: hours worked, 3: name of next scene
-        float taxRate = .10f, hourlyRate=15f;
-        int hoursWorked = 0;
+        float taxRate = Mathf.Round(Random.Range(0.1f, 0.6f) * 100.0f) / 100.0f;
+        float hourlyRate = DataWriter.GetScore() > 20 ? 30f : 15f;
+        int hoursWorked = 8;
 
-        nextLevel = "placeholder lmao ";
-
-        //insert TODO code here
-
-        infoText.text = string.Format("Tax Rate: {0}% // Hourly Rate: ${1} // Hours Worked: {2}", fileData[0], fileData[1], fileData[2]);
+        infoText.text = string.Format("Tax Rate: {0}% // Hourly Rate: ${1} // Hours Worked: {2}", taxRate, hourlyRate, hoursWorked);
 
         answerToGrossPay = hourlyRate * hoursWorked;
         answerToNetPay = answerToGrossPay * (1 - taxRate);
 
-        //submit.gameObject.onClick.AddListener(onClick);
+        // Debug.Log(answerToGrossPay);
+        // Debug.Log(answerToNetPay);
+
+        
     }
 
-    void onClick(){
-        Debug.Log("AAAAAAAAAAAAAAA");
+    public void onClick(){
         string grossStr = answerToGrossPay.ToString();
         string netStr = answerToNetPay.ToString();
 
         string grossSub = grossPay.text;
         string netSub = netPay.text;
 
+        int nextLevel = DataWriter.GetLevel() + 1;
+        int score = DataWriter.GetScore();
+        bool IRSSpawn = true;
         if(string.Equals(grossStr, grossSub) && string.Equals(netStr, netSub)){ //got both correct
-            //TODO: write to file got it right, lower chance of IRS spawn by 50%
-
-        }else{
-            //TODO: write to file got it wrong, raise chance of IRS spawn by 50%
-
+            IRSSpawn = false;
+            score += 50;
         }
-
-        SceneManager.LoadScene(nextLevel);
+        DataWriter.writeData(nextLevel, true, score);
+        SceneManager.LoadScene("GameLevel");
     }
 }

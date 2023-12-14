@@ -4,7 +4,6 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Newtonsoft.Json;
 
 public class Player : MonoBehaviour
 {
@@ -23,19 +22,10 @@ public class Player : MonoBehaviour
     public float currentTime;
     public float totalStamina = 13f;
     public float stamina;
-    public bool isAlive; //modify if IRS touches or car touches
+    public bool isAlive;
     public Image staminaBar;
-
     public Text timer;
 
-    [System.Serializable]
-    public class DataObject
-    {
-        public int GameLevel;
-        public bool IRSSpawn;
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent <CharacterController>();
@@ -47,7 +37,6 @@ public class Player : MonoBehaviour
         gravity = 20f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         handleRoundTimer();
@@ -58,10 +47,8 @@ public class Player : MonoBehaviour
         {
             //STAMINA BAR; LASTS 13 SECONNDS AND DOES NOT REPLENISH UNLESS GRANTED BY SOMETHING ELSE
             if(Input.GetKey ("left shift") && stamina > 0){
-                //TODO: CREATE A BAR THAT RESIZES BASED ON STAMINA PROPORTION STAMINA/TOTALSTAMINAz
                 speed = 15.0f;
                 stamina -= Time.deltaTime;
-                
             }else{
                 speed = 10.0f;
             }
@@ -87,32 +74,6 @@ public class Player : MonoBehaviour
         transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
     }
 
-    void writeDataToFile(int gameLevel, bool irsSpawn){
-        //TODO: CREATE A FILE FOR THE TAX MENU SCRIPT TO READ
-        //WE NEED TO STORE THE CURRENT LEVEL AND IS IRS SPAWNING
-        //IF FIRST LEVEL, IRS SPAWNING IS FALSE; ONLY CHANGE TO TRUE IN THE TAX MENU SCRIPT IF PLAYER GETS ANSWER(S) WRONG
-        //MAY NEED MORE FIELDS TO SAVE BUT CANT THINK OF ANY AT THE MOMENT
-        
-        DataObject data = new DataObject
-        {
-            GameLevel = gameLevel,
-            IRSSpawn = irsSpawn
-        };
-
-        // Convert the data object to a JSON string
-        string jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
-
-        // Specify the file path
-        string filePath = Application.dataPath + "/data.json";
-
-        // Write the JSON string to the file
-        File.WriteAllText(filePath, jsonString);
-
-        Debug.Log("Data written to file: " + filePath);
-
-
-    }
-
     void handleGameState(){
         if(!isAlive){
             SceneManager.LoadScene("Game_Over");
@@ -120,18 +81,14 @@ public class Player : MonoBehaviour
     }
 
     void handleRoundTimer(){
-        //ROUND TIMER
         if(currentTime > 0){
-            //TODO: CREATE A VARIABLE FOR TIMER GAME OBJECT AND MODIFY IT HERE
             currentTime -= Time.deltaTime;
             timer.text = "TIME LEFT: " + (int)currentTime + " SECONDS";
-            if(currentTime < 20){
+            if(currentTime < 20)
                 timer.color = Color.red;
-            }
         }else{
-            //TIMES UP BITCH
-            writeDataToFile(0, false);
-            SceneManager.LoadScene("Taxes_Menu"); //THIS MIGHT NOT BE THE RIGHT NAME RN
+            DataWriter.writeData(0, false, correctDeliveries * 15 - wrongDeliveries * 5);
+            SceneManager.LoadScene("Taxes_Menu");
         }
     }
 }
