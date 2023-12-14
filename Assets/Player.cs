@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Newtonsoft.Json;
 
 public class Player : MonoBehaviour
 {
@@ -25,6 +27,13 @@ public class Player : MonoBehaviour
     public Image staminaBar;
 
     public Text timer;
+
+    [System.Serializable]
+    public class DataObject
+    {
+        public int GameLevel;
+        public bool IRSSpawn;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +93,24 @@ public class Player : MonoBehaviour
         //IF FIRST LEVEL, IRS SPAWNING IS FALSE; ONLY CHANGE TO TRUE IN THE TAX MENU SCRIPT IF PLAYER GETS ANSWER(S) WRONG
         //MAY NEED MORE FIELDS TO SAVE BUT CANT THINK OF ANY AT THE MOMENT
         
+        DataObject data = new DataObject
+        {
+            GameLevel = gameLevel,
+            IRSSpawn = irsSpawn
+        };
+
+        // Convert the data object to a JSON string
+        string jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+        // Specify the file path
+        string filePath = Application.dataPath + "/data.json";
+
+        // Write the JSON string to the file
+        File.WriteAllText(filePath, jsonString);
+
+        Debug.Log("Data written to file: " + filePath);
+
+
     }
 
     void handleGameState(){
