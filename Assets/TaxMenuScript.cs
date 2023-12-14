@@ -43,7 +43,7 @@ public class TaxMenuScript : MonoBehaviour
             IRSSpawn = false;
             score += 50;
         }
-        DataWriter.writeData(nextLevel, true, score);
+        DataWriter.writeData(nextLevel, IRSSpawn, score);
         SceneManager.LoadScene("GameLevel");
     }
 }
