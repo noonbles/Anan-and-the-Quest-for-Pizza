@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public Image staminaBar;
     public Text timer;
     public Image blackScreen;
+    public Text delivery;
     private bool animationDone;
 
     void Start()
@@ -102,11 +103,10 @@ public class Player : MonoBehaviour
 
     void handlePizza(){
         Transform pizza = transform.Find("Pizza");
-        if(isHoldingPizza && !heldPizzaName.Equals("")){
-            pizza.gameObject.SetActive(true);
-            pizza.Rotate(Vector3.up * 7f * Time.deltaTime);
-        }else{
-            pizza.gameObject.SetActive(false);
-        }
+        bool active = isHoldingPizza && !heldPizzaName.Equals("");
+        delivery.text = "Deliver this pizza to: " + heldPizzaName;
+        delivery.gameObject.SetActive(active);
+        pizza.gameObject.SetActive(active);
+        pizza.Rotate(Vector3.up * 7f * Time.deltaTime);
     }
 }
