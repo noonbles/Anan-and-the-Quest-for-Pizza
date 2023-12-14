@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     public bool isAlive;
     public Image staminaBar;
     public Text timer;
+    public Image blackScreen;
+    private bool animationDone;
 
     void Start()
     {
@@ -35,49 +37,60 @@ public class Player : MonoBehaviour
         stamina = totalStamina;
         isAlive = true;
         gravity = 20f;
+        LeanTween.moveX(blackScreen.gameObject, 2900, 1.0f).setOnComplete(()=>{animationDone = true;});
     }
 
     void Update()
     {
-        handleRoundTimer();
-        handleGameState();
-        staminaBar.rectTransform.sizeDelta = new Vector2((stamina/totalStamina) * 1200, 30);
+        if(animationDone){
+            handleRoundTimer();
+            handleGameState();
+            staminaBar.rectTransform.sizeDelta = new Vector2((stamina/totalStamina) * 1200, 30);
 
-        if(Input.GetKey ("w"))
-        {
-            //STAMINA BAR; LASTS 13 SECONNDS AND DOES NOT REPLENISH UNLESS GRANTED BY SOMETHING ELSE
-            if(Input.GetKey ("left shift") && stamina > 0){
-                speed = 15.0f;
-                stamina -= Time.deltaTime;
-            }else{
-                speed = 10.0f;
+            if(Input.GetKey ("w"))
+            {
+                //STAMINA BAR; LASTS 13 SECONNDS AND DOES NOT REPLENISH UNLESS GRANTED BY SOMETHING ELSE
+                if(Input.GetKey ("left shift") && stamina > 0){
+                    speed = 15.0f;
+                    stamina -= Time.deltaTime;
+                }else{
+                    speed = 10.0f;
+                }
+
+
+                float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
+                float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
+                moveDirection = new Vector3(xdirection, 0.0f, zdirection);
+                animationController.SetBool("isMoving", true);
             }
+            else
+            {
+                moveDirection = Vector3.zero;
+                animationController.SetBool("isMoving", false);
+            }
+            if (!controller.isGrounded)
+            {
+                moveDirection.y -= gravity * Time.deltaTime;
+            }
+            controller.Move(moveDirection * speed * Time.deltaTime);
 
+            float turn = Input.GetAxis("Horizontal");
+            transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
+        }
+    }
 
-            float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
-            float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
-            moveDirection = new Vector3(xdirection, 0.0f, zdirection);
-            animationController.SetBool("isMoving", true);
+    void fadeToBlack(bool dir){
+        if(dir){
+            
+        }else{
+            
         }
-        else
-        {
-            moveDirection = Vector3.zero;
-            animationController.SetBool("isMoving", false);
-        }
-        if (!controller.isGrounded)
-        {
-            moveDirection.y -= gravity * Time.deltaTime;
-        }
-        controller.Move(moveDirection * speed * Time.deltaTime);
-
-        float turn = Input.GetAxis("Horizontal");
-        transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
     }
 
     void handleGameState(){
         if(!isAlive){
-            SceneManager.LoadScene("Game_Over");
-        } 
+            LeanTween.moveX(blackScreen.gameObject, 300, 1.0f).setOnComplete(()=>{SceneManager.LoadScene("Game_Over");});
+        }
     }
 
     void handleRoundTimer(){
@@ -88,7 +101,7 @@ public class Player : MonoBehaviour
                 timer.color = Color.red;
         }else{
             DataWriter.writeData(0, false, correctDeliveries * 15 - wrongDeliveries * 5);
-            SceneManager.LoadScene("Taxes_Menu");
+            LeanTween.moveX(blackScreen.gameObject, 300, 1.0f).setOnComplete(()=>{SceneManager.LoadScene("Taxes_Menu");});
         }
     }
 }
