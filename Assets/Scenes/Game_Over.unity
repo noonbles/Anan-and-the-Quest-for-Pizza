@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 571525067}
   - component: {fileID: 571525066}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Game Over
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,7 +225,7 @@ RectTransform:
   m_GameObject: {fileID: 571525064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2015952093}
@@ -530,7 +530,7 @@ GameObject:
   - component: {fileID: 1869085978}
   - component: {fileID: 1869085977}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Try Again
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,7 +553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -700}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1869085977
@@ -568,6 +568,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b860797b32f1548a52b72482c2007a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cont: {fileID: 0}
+  gameOver: {fileID: 0}
 --- !u!114 &1869085978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,6 +790,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b860797b32f1548a52b72482c2007a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cont: {fileID: 1869085978}
+  gameOver: {fileID: 571525066}
 --- !u!114 &2015952090
 MonoBehaviour:
   m_ObjectHideFlags: 0
