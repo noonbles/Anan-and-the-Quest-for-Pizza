@@ -6,14 +6,21 @@ using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour
 {
+    public Image blackScreen;
     public GameObject pizza;
 
     public void OnClick(){
-        SceneManager.LoadScene("GameLevel");
+        Destroy(pizza);
+        blackScreen.gameObject.SetActive(true);
+        LeanTween.alpha(blackScreen.gameObject, 1, 3.0f).setOnComplete(()=>{
+            SceneManager.LoadScene("GameLevel");
+        });
     }
 
     void Update()
     {
-        pizza.transform.Rotate(Vector3.up * 7f * Time.deltaTime);
+        if(pizza){
+            pizza.transform.Rotate(Vector3.up * 7f * Time.deltaTime);
+        }
     }
 }

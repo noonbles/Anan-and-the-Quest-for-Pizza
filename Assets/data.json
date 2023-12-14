@@ -1,5 +1,5 @@
 {
-  "GameLevel": 0,
-  "IRSSpawn": false,
+  "GameLevel": 1,
+  "IRSSpawn": true,
   "Score": 0
 }
