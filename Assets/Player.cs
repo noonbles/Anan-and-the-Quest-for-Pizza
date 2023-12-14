@@ -79,17 +79,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    void fadeToBlack(bool dir){
-        if(dir){
-            
-        }else{
-            
-        }
-    }
-
     void handleGameState(){
         if(!isAlive){
-            LeanTween.moveX(blackScreen.gameObject, 300, 1.0f).setOnComplete(()=>{SceneManager.LoadScene("Game_Over");});
+            LeanTween.moveX(blackScreen.gameObject, 300, 1.0f).setOnComplete(()=>{
+                SceneManager.LoadScene("Game_Over");
+            });
         }
     }
 
