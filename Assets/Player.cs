@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 {
     private CharacterController controller;
     private Animator animationController;
-    private Vector3 moveDirection;
+    public Vector3 moveDirection;
     public bool isHoldingPizza = false;
     public string heldPizzaName = "";
     public int correctDeliveries;
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
             handlePizza();
             staminaBar.rectTransform.sizeDelta = new Vector2((stamina/totalStamina) * 1200, 30);
 
-            if(Input.GetKey ("w"))
+            if (Input.GetKey ("w"))
             {
                 //STAMINA BAR; LASTS 13 SECONNDS AND DOES NOT REPLENISH UNLESS GRANTED BY SOMETHING ELSE
                 if(Input.GetKey ("left shift") && stamina > 0){
@@ -65,6 +65,13 @@ public class Player : MonoBehaviour
                 moveDirection = new Vector3(xdirection, 0.0f, zdirection);
                 animationController.SetBool("isMoving", true);
             }
+            // else if (Input.GetKey("s"))
+            // {
+            //     float xdirection = Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
+            //     float zdirection = Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.y);
+            //     moveDirection = new Vector3(-xdirection, 0.0f, -zdirection);
+            //     animationController.SetBool("isMoving", true);
+            // }
             else
             {
                 moveDirection = Vector3.zero;
