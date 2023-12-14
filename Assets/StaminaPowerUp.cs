@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimePowerUp : MonoBehaviour
+public class StaminaPowerUp : MonoBehaviour
 {
     void OnCollisionEnter(Collision collision)
     {
-        Player p = collision;
+        Debug.Log("FUCK");
+        Player p = collision.gameObject.GetComponent<Player>();
         if (p)
         {
             if (p.stamina < 13.0f)

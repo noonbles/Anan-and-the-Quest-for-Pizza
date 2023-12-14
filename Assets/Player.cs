@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class Player : MonoBehaviour
     public float currentTime;
     public float totalStamina = 13f;
     public float stamina;
+
+    public Text timer;
 
     // Start is called before the first frame update
     void Start()
@@ -81,10 +84,14 @@ public class Player : MonoBehaviour
         if(currentTime > 0){
             //TODO: CREATE A VARIABLE FOR TIMER GAME OBJECT AND MODIFY IT HERE
             currentTime -= Time.deltaTime;
+            timer.text = "TIME LEFT: " + (int)currentTime + " SECONDS";
+            if(currentTime < 20){
+                timer.color = Color.red;
+            }
         }else{
             //TIMES UP BITCH
             writeDataToFile(0, false);
-            SceneManager.LoadScene("TaxMenu"); //THIS MIGHT NOT BE THE RIGHT NAME RN
+            SceneManager.LoadScene("Taxes_Menu"); //THIS MIGHT NOT BE THE RIGHT NAME RN
         }
     }
 }
