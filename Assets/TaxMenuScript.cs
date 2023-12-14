@@ -9,6 +9,7 @@ public class TaxMenuScript : MonoBehaviour
     public InputField grossPay;
     public InputField netPay;
     public Text infoText;
+    public Button submit;
     private float answerToGrossPay;
     private float answerToNetPay;
 
@@ -26,7 +27,12 @@ public class TaxMenuScript : MonoBehaviour
         // Debug.Log(answerToGrossPay);
         // Debug.Log(answerToNetPay);
 
-        
+        LeanTween.moveY(infoText.gameObject, 700, 1.0f).setOnComplete(() => {
+            Debug.Log("finished moving infotext");
+            LeanTween.moveY(grossPay.gameObject, 500, 1.0f);
+            LeanTween.moveY(netPay.gameObject, 450, 1.0f);
+            LeanTween.moveY(submit.gameObject, 300, 1.0f);
+        });
     }
 
     public void onClick(){
