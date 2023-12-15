@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     public Text timer;
     public Image blackScreen;
     public Text delivery;
+    public Text deliveryLoc;
     private bool animationDone;
 
     void Start()
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour
             handleRoundTimer();
             handleGameState();
             handlePizza();
+            handleDist();
             staminaBar.rectTransform.sizeDelta = new Vector2((stamina/totalStamina) * 1200, 30);
 
             if (Input.GetKey ("w"))
@@ -115,5 +117,22 @@ public class Player : MonoBehaviour
         delivery.gameObject.SetActive(active);
         pizza.gameObject.SetActive(active);
         pizza.Rotate(Vector3.up * 7f * Time.deltaTime);
+    }
+    void handleDist()
+    {
+        if (isHoldingPizza)
+        {
+            deliveryLoc.gameObject.SetActive(true);
+            //Transform pizza = transform.Find("Pizza");
+            //pizza.LookAt(GameObject.Find(heldPizzaName).transform);
+            Vector3 DeliveryLoc = GameObject.Find(heldPizzaName).transform.position;
+            Vector3 offset = transform.position - DeliveryLoc;
+            float magnitude = offset.magnitude;
+            deliveryLoc.text = "Distance to Delivery Location: " + magnitude;
+        }
+        else
+        {
+            deliveryLoc.gameObject.SetActive(false);
+        }
     }
 }
