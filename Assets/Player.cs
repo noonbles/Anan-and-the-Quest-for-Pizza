@@ -109,11 +109,11 @@ public class Player : MonoBehaviour
         {
             if(DataWriter.GetLevel() >= 7)
             {
-                Debug.Log("Win");
-                return;
+                DataWriter.writeData(7, false, DataWriter.GetScore() + 100);
+                SceneManager.LoadScene("Win");
             }
             LeanTween.moveX(blackScreen.gameObject, 300, 1.0f).setOnComplete(()=>{
-                DataWriter.writeData(DataWriter.GetLevel(), false, correctDeliveries * 15 - wrongDeliveries * 5);
+                DataWriter.writeData(DataWriter.GetLevel(), false, DataWriter.GetScore() + correctDeliveries * 15 - wrongDeliveries * 5);
                 SceneManager.LoadScene("Taxes_Menu");
              });
         }

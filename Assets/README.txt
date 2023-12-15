@@ -10,3 +10,15 @@ Jicheng Li:
 
 
 Adam Trac:
+implemented powerup functionality and animations (TimePowerUp.cs, StaminaPowerUp.cs, Player.cs)
+implemented stamina, timer, game over, tax menu, and start menu UI (designed, implemented in various .cs files)
+implemented UI animations (TaxMenuScript.cs, Player.cs, TimePowerUp.cs, StartMenu.cs, PlayAgain.cs)
+implemented timer and gameplay logic (Player.cs, House.cs, Shop.cs)
+implemented the tax menu, start menu, game over functionality (PlayAgain.cs, TaxMenuScript.cs, StartMenu.cs)
+implemented level design (added and distributed powerups among the levels)
+implemented win conditions, and collision code (TimePowerUp.cs, Player.cs, StaminaPowerUp.cs, CarNav.cs)
+implemented the data writing/reading code and the file reading functionality (DataWriter.cs, Player.cs, PlayAgain.cs, StartMenu.cs, TaxMenuScript.cs)
+implemented audio and music (added the music in all scenes, added sound effects for cars, getting pizza, delivering pizza, etc.)
+
+GITHUB REPO FOR GAME PROJECT:
+https://github.com/noonbles/Anan-and-the-Quest-for-Pizza
