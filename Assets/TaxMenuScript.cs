@@ -59,7 +59,7 @@ public class TaxMenuScript : MonoBehaviour
         LeanTween.moveY(infoText.gameObject, 1000, 1.0f);
         LeanTween.moveY(grossPay.gameObject, -500, 1.0f);
         LeanTween.moveY(netPay.gameObject, -500, 1.0f);
-        LeanTween.moveY(submit.gameObject, -500, 1.0f).setOnComplete(()=>{SceneManager.LoadScene("GameLevel");});
+        LeanTween.moveY(submit.gameObject, -500, 1.0f).setOnComplete(()=>{SceneManager.LoadScene("Level " + DataWriter.GetLevel());});
         
     }
 }

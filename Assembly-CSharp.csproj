@@ -52,6 +52,7 @@
      <Compile Include="Assets\LeanTween\Testing\Testing248.cs" />
      <Compile Include="Assets\LeanTween\Testing\TestingDescr.cs" />
      <Compile Include="Assets\LeanTween\Testing\TestingColorTweening.cs" />
+     <Compile Include="Assets\SpawnIRS.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSimpleUI.cs" />
      <Compile Include="Assets\CarNav.cs" />
      <Compile Include="Assets\Clock\Scripts\Clock.cs" />
@@ -76,6 +77,7 @@
      <Compile Include="Assets\TaxMenuScript.cs" />
      <Compile Include="Assets\LeanTween\Testing\Testing246.cs" />
      <Compile Include="Assets\House.cs" />
+     <Compile Include="Assets\IRS.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacyExt.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSequencer.cs" />
      <Compile Include="Assets\StartMenu.cs" />
@@ -90,6 +92,7 @@
      <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
      <Compile Include="Assets\LeanTween\Framework\LeanTweenExt.cs" />
      <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
+     <Compile Include="Assets\GenericNPC.cs" />
      <Compile Include="Assets\LeanTween\Framework\LeanAudio.cs" />
      <Compile Include="Assets\TimePowerUp.cs" />
      <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
@@ -101,8 +104,11 @@
      <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
      <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplines.cs" />
      <None Include="Assets\LeanTween\ReadMe.txt" />
+     <None Include="Assets\Car Engine Sound - i6 German Free\Documentation\Read Me.txt" />
      <None Include="Assets\Baker House\Readme.txt" />
      <None Include="Assets\LeanTween\License.txt" />
+     <None Include="Assets\Urban Jazz\WAV\__Read Me!.txt" />
+     <None Include="Assets\Car Engine Sound - i6 German Free\Assets\Audio\Read Me.txt" />
      <None Include="Assets\BrokenVector\LowPolyShaders\Shaders\LowPolyUnlitShader.shader" />
      <None Include="Assets\BrokenVector\LowPolyShaders\Shaders\LowPolyPBRShader.shader" />
      <None Include="Assets\POLYGON city pack\Read_me.txt" />

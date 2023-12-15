@@ -8,6 +8,7 @@ public class TimePowerUp : MonoBehaviour
     public Text addTime;
     private Vector3 originalPosition;
     private bool visited;
+    public AudioClip source;
     void Start()
     {
         originalPosition = transform.position;
@@ -25,6 +26,9 @@ public class TimePowerUp : MonoBehaviour
         if (p && !visited)
         {
             visited = true;
+            AudioSource audioSource = p.GetComponent<AudioSource>();
+            audioSource.clip = source;
+            audioSource.Play();
             gameObject.SetActive(false);
             p.currentTime += 5f;
             LeanTween.moveY(addTime.gameObject, 680, 1.0f).setOnComplete(()=>{

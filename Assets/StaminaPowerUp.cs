@@ -5,6 +5,7 @@ using UnityEngine;
 public class StaminaPowerUp : MonoBehaviour
 {
     private Vector3 originalPosition;
+    public AudioClip source;
     void Start()
     {
         originalPosition = transform.position;
@@ -23,6 +24,9 @@ public class StaminaPowerUp : MonoBehaviour
         {
             if (p.stamina < 13.0f)
             {
+                AudioSource audioSource = p.GetComponent<AudioSource>();
+                audioSource.clip = source;
+                audioSource.Play();
                 p.stamina = 13.0f;
                 Destroy(gameObject);
             }

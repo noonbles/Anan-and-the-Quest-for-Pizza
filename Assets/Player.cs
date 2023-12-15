@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     public float speed = 10.0f;
     public float turnSpeed = 150.0f;
-    public float totalTime = 120f;
+    private float totalTime = 10f;
     public float currentTime;
     public float totalStamina = 13f;
     public float stamina;
@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     public Text timer;
     public Image blackScreen;
     public Text delivery;
+    public Text deliveryLoc;
     private bool animationDone;
 
     void Start()
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour
             handleRoundTimer();
             handleGameState();
             handlePizza();
+            handleDist();
             staminaBar.rectTransform.sizeDelta = new Vector2((stamina/totalStamina) * 1200, 30);
 
             if (Input.GetKey ("w"))
@@ -103,8 +105,10 @@ public class Player : MonoBehaviour
             if(currentTime < 20)
                 timer.color = Color.red;
         }else{
-            DataWriter.writeData(0, false, correctDeliveries * 15 - wrongDeliveries * 5);
-            LeanTween.moveX(blackScreen.gameObject, 300, 1.0f).setOnComplete(()=>{SceneManager.LoadScene("Taxes_Menu");});
+            LeanTween.moveX(blackScreen.gameObject, 300, 1.0f).setOnComplete(()=>{
+                DataWriter.writeData(DataWriter.GetLevel(), false, correctDeliveries * 15 - wrongDeliveries * 5);
+                SceneManager.LoadScene("Taxes_Menu");
+             });
         }
     }
 
@@ -115,5 +119,25 @@ public class Player : MonoBehaviour
         delivery.gameObject.SetActive(active);
         pizza.gameObject.SetActive(active);
         pizza.Rotate(Vector3.up * 7f * Time.deltaTime);
+    }
+    void handleDist()
+    {
+        if (isHoldingPizza)
+        {
+            deliveryLoc.gameObject.SetActive(true);
+            transform.Find("Stone3").gameObject.SetActive(true);
+            Transform gem = transform.Find("Stone3");
+            gem.LookAt(GameObject.Find(heldPizzaName).transform);
+            gem.Rotate(new Vector3(90, gem.rotation.y, gem.rotation.z));
+            Vector3 DeliveryLoc = GameObject.Find(heldPizzaName).transform.position;
+            Vector3 offset = transform.position - DeliveryLoc;
+            float magnitude = offset.magnitude;
+            deliveryLoc.text = "Distance to Delivery Location: " + magnitude;
+        }
+        else
+        {
+            deliveryLoc.gameObject.SetActive(false);
+            transform.Find("Stone3").gameObject.SetActive(false);
+        }
     }
 }

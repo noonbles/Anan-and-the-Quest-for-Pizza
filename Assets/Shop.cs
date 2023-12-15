@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     private int assignHouse;
+    public AudioClip audio;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +15,9 @@ public class Shop : MonoBehaviour
         if (p)
         {
             GameObject[] GOList = GameObject.FindGameObjectsWithTag("House");
+            AudioSource audioSource = p.GetComponent<AudioSource>();
+            audioSource.clip = audio;
+            audioSource.Play();
             assignHouse = r.Next(0, GOList.Length);
             p.isHoldingPizza = true;
             p.heldPizzaName = GOList[assignHouse].name;
