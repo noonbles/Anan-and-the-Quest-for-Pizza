@@ -13,6 +13,7 @@ public class StartMenu : MonoBehaviour
         Destroy(pizza);
         blackScreen.gameObject.SetActive(true);
         LeanTween.alpha(blackScreen.gameObject, 1, 3.0f).setOnComplete(()=>{
+            DataWriter.writeData(1, false, 0);
             SceneManager.LoadScene("GameLevel");
         });
     }
