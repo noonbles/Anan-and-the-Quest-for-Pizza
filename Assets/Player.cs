@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     public float speed = 10.0f;
     public float turnSpeed = 150.0f;
-    private float totalTime = 10f;
+    private float totalTime = 5f;
     public float currentTime;
     public float totalStamina = 13f;
     public float stamina;
@@ -104,7 +104,14 @@ public class Player : MonoBehaviour
             timer.text = "TIME LEFT: " + (int)currentTime + " SECONDS";
             if(currentTime < 20)
                 timer.color = Color.red;
-        }else{
+        }
+        else
+        {
+            if(DataWriter.GetLevel() >= 7)
+            {
+                Debug.Log("Win");
+                return;
+            }
             LeanTween.moveX(blackScreen.gameObject, 300, 1.0f).setOnComplete(()=>{
                 DataWriter.writeData(DataWriter.GetLevel(), false, correctDeliveries * 15 - wrongDeliveries * 5);
                 SceneManager.LoadScene("Taxes_Menu");
