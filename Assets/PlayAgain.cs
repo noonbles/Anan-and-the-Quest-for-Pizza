@@ -19,7 +19,8 @@ public class PlayAgain : MonoBehaviour
         });
     }
     public void OnClick(){
-        DataWriter.writeData(1, false, 0);
-        SceneManager.LoadScene("GameLevel"); //might have to change later
+        int level = DataWriter.GetLevel();
+        DataWriter.writeData(level, false, 0);
+        SceneManager.LoadScene("Level " + level);
     }
 }

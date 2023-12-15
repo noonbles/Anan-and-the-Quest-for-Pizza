@@ -40,7 +40,7 @@ public static class DataWriter
         }
 
         return new DataObject{
-            GameLevel = 0,
+            GameLevel = 1,
             IRSSpawn = false,
             Score = 0
         };
