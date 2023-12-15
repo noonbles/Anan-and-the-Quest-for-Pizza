@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     public float speed = 10.0f;
     public float turnSpeed = 150.0f;
-    public float totalTime = 120f;
+    private float totalTime = 10f;
     public float currentTime;
     public float totalStamina = 13f;
     public float stamina;
@@ -105,8 +105,10 @@ public class Player : MonoBehaviour
             if(currentTime < 20)
                 timer.color = Color.red;
         }else{
-            DataWriter.writeData(0, false, correctDeliveries * 15 - wrongDeliveries * 5);
-            LeanTween.moveX(blackScreen.gameObject, 300, 1.0f).setOnComplete(()=>{SceneManager.LoadScene("Taxes_Menu");});
+            LeanTween.moveX(blackScreen.gameObject, 300, 1.0f).setOnComplete(()=>{
+                DataWriter.writeData(DataWriter.GetLevel(), false, correctDeliveries * 15 - wrongDeliveries * 5);
+                SceneManager.LoadScene("Taxes_Menu");
+             });
         }
     }
 
