@@ -12,9 +12,12 @@ public class TaxMenuScript : MonoBehaviour
     public Button submit;
     private float answerToGrossPay;
     private float answerToNetPay;
+    public AudioClip clickSound;
+    private AudioSource audioSource;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         float taxRate = Mathf.Round(Random.Range(0.1f, 0.6f) * 100.0f) / 100.0f;
         float hourlyRate = DataWriter.GetScore() > 20 ? 30f : 15f;
         int hoursWorked = 8;
@@ -36,6 +39,9 @@ public class TaxMenuScript : MonoBehaviour
     }
 
     public void onClick(){
+        audioSource.clip = clickSound;
+        audioSource.Play();
+
         string grossStr = answerToGrossPay.ToString();
         string netStr = answerToNetPay.ToString();
 
