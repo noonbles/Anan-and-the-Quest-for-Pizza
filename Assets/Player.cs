@@ -123,8 +123,10 @@ public class Player : MonoBehaviour
         if (isHoldingPizza)
         {
             deliveryLoc.gameObject.SetActive(true);
-            //Transform pizza = transform.Find("Pizza");
-            //pizza.LookAt(GameObject.Find(heldPizzaName).transform);
+            transform.Find("Stone3").gameObject.SetActive(true);
+            Transform gem = transform.Find("Stone3");
+            gem.LookAt(GameObject.Find(heldPizzaName).transform);
+            gem.Rotate(new Vector3(90, gem.rotation.y, gem.rotation.z));
             Vector3 DeliveryLoc = GameObject.Find(heldPizzaName).transform.position;
             Vector3 offset = transform.position - DeliveryLoc;
             float magnitude = offset.magnitude;
@@ -133,6 +135,7 @@ public class Player : MonoBehaviour
         else
         {
             deliveryLoc.gameObject.SetActive(false);
+            transform.Find("Stone3").gameObject.SetActive(false);
         }
     }
 }

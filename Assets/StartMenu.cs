@@ -15,17 +15,18 @@ public class StartMenu : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void OnClick(){
+    public void OnClick()
+    {
         audioSource.clip = clickSound;
         audioSource.Play();
         Destroy(pizza);
         blackScreen.gameObject.SetActive(true);
-        LeanTween.moveY(blackScreen.gameObject, 0, 0.5f).setOnComplete(()=>{
+        LeanTween.moveY(blackScreen.gameObject, 0, 0.5f).setOnComplete(() =>
+        {
             DataWriter.writeData(1, false, 0);
-            SceneManager.LoadScene("GameLevel");
+            SceneManager.LoadScene("Level 1");
         });
     }
-
     void Update()
     {
         if(pizza){
