@@ -20,4 +20,10 @@ public class IRS : MonoBehaviour
     {
         agent.SetDestination(player.transform.position);
     }
+
+    void OnTriggerEnter(Collider e)
+    {
+        if (e.name == "Player")
+            e.GetComponent<Player>().isAlive = false;
+    }
 }

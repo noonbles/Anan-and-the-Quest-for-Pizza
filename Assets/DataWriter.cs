@@ -54,4 +54,8 @@ public static class DataWriter
         return readData().GameLevel;
     }
     
+    public static bool ShouldSpawnIRS()
+    {
+        return readData().IRSSpawn;
+    }
 }
