@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GameLevel.unity
+    path: Assets/Scenes/Level 1.unity
     guid: bf2769ba90ac2384cb8856d8ea97ef44
   - enabled: 1
     path: Assets/Scenes/Taxes_Menu.unity

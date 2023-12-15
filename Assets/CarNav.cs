@@ -8,29 +8,25 @@ public class CarNav : MonoBehaviour
     public NavMeshAgent CarAgent;
     public string Movement;
 
-    private int cpos = 0;
-    private int ccpos = 0;
+    public int cpos = 0;
+    public int ccpos = 0;
     private Vector3[] ClockwiseOuterDriveDest = {
-        new Vector3(-389.85f, 69.66f, 14f),
-        new Vector3(-397.85f, 69.66f, 46f),
-        new Vector3(-329.85f, 69.66f, 50f),
-        new Vector3(-289.85f, 69.66f, 54f),
+        new Vector3(-321.85f, 69.66f, 46f),
+        new Vector3(-300.85f, 69.66f, 51f),
         new Vector3(-253.85f, 69.66f, 62f),
-        new Vector3(-213.85f, 69.66f, 62f),
-        new Vector3(-209.85f, 69.66f, 18f),
-        new Vector3(-313.85f, 69.66f, 14f),
+        new Vector3(-209.85f, 69.66f, 52f),
+        new Vector3(-209.85f, 69.66f, 26f),
+        new Vector3(-239.02f, 69.66f, 14f),
+        new Vector3(-288.90f, 69.66f, 14f),
+        new Vector3(-321.85f, 69.66f, 22f),
     };
     private Vector3[] CCOuterDriveDest = {
-        new Vector3(-205.85f, 69.66f, 22f),
-        new Vector3(-205.85f, 69.66f, 58f),
-        new Vector3(-285.85f, 69.66f, 54f),
-        new Vector3(-313.85f, 69.66f, 54f),
+        new Vector3(-334.85f, 69.66f, 6f),
+        new Vector3(-325.85f, 69.66f, 34f),
+        new Vector3(-349.85f, 69.66f, 54f),
         new Vector3(-389.85f, 69.66f, 54f),
-        new Vector3(-405.85f, 69.66f, 42f),
-        new Vector3(-405.85f, 69.66f, 18f),
-        new Vector3(-385.85f, 69.66f, 6f),
-        new Vector3(-313.85f, 69.66f, 6f),
-        new Vector3(-217.85f, 69.66f, 6f),
+        new Vector3(-405.85f, 69.66f, 28f),
+        new Vector3(-369.85f, 69.66f, 6f),
     };
     // Start is called before the first frame update
     void Start()
