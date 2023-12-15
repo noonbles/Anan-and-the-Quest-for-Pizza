@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     public float speed = 10.0f;
     public float turnSpeed = 150.0f;
-    private float totalTime = 5f;
+    private float totalTime = 120f;
     public float currentTime;
     public float totalStamina = 13f;
     public float stamina;
