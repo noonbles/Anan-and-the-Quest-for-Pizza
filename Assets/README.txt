@@ -7,7 +7,15 @@ coded character movement controls and animation state changes in Player.cs
 wrote ShouldSpawnIRS function in DataWriter.cs
 
 Jicheng Li:
-
+Implemented level design in all level scenes w.r.t the delivery locations--Houses--. Editing select assets in all scene to have house tags --Houses and NPCs--.
+Added the all cars to the map, and colliders to them to prompt GameOver with Adam's Code.
+Implemented the NavMesh for the Car Assets(Road Nav Mesh)
+Wrote the logic for the Car Movement, setting the destinations and having them loop around the map(CarNav.cs)
+Set up the collider boxes for houses, the shop, and the NPCs that are being delivered to.
+Wrote the Pizza pickup and delivery logic. i.e. updating status of isHoldingPizza and heldPizzaName(Delivery Location) when Player Collides with the shop(looping through all gameobjects with the tag house to choose a destination) and the destination NPC/House (Shop.cs, House.cs)
+Added the UI for the magnitude for the player to know the direction they should head to get the Pizza to its destination on the canvas.
+Wrote the handleDist() function that updates the UI component to show the magnitude of the player to Pizza delivery destination. Also some of the logic for setting UI components and gameobjects active or not based on isHoldingPizza status (Player.cs)
+Helped add audio in the scenes. Mainly when adding new delivery locations in later scene when setting up them up as delivery destinations
 
 Adam Trac:
 implemented powerup functionality and animations (TimePowerUp.cs, StaminaPowerUp.cs, Player.cs)
